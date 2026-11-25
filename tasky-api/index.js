@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
+import authenticate from './authenticate';
 import tasksRouter from './api/tasks';
 import usersRouter from './api/users';
 import './db';
@@ -24,7 +25,7 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(express.static('public'));
 app.use(express.json());
-app.use('/api/tasks', tasksRouter);
+app.use('/api/tasks', authenticate, tasksRouter);
 app.use('/api/users', usersRouter);
 app.use(errHandler);
 
